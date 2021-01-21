@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, protocol, BrowserWindow, Menu } from 'electron'
 import {
   createProtocol,
   installVueDevtools
@@ -24,11 +24,14 @@ protocol.registerSchemesAsPrivileged([{
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1000,
+    height: 750,
     webPreferences: {
-      nodeIntegration: true
-    }
+      nodeIntegration: true,
+      webSecurity: false // webSecurity取消跨域限制
+    },
+    // eslint-disable-next-line no-undef
+    icon: `${__static}/app.png`
   })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -44,6 +47,28 @@ function createWindow () {
   win.on('closed', () => {
     win = null
   })
+
+  createMenu()
+}
+
+// 设置菜单栏
+function createMenu() {
+  // darwin表示macOS,针对macOS的设置
+  if (process.platform) {
+    const template = [{
+      label: 'App Demo',
+      submenu: [{
+        role: 'about'
+      }, {
+        role: 'quit'
+      }]
+    }]
+    const menu = Menu.buildFromTemplate(template)
+    Menu.setApplicationMenu(menu)
+  } else {
+    // windows / linux系统
+    Menu.setApplicationMenu(null)
+  }
 }
 
 // Quit when all windows are closed.

@@ -1,18 +1,35 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div style="display: flex;">
+      <NavList/>
+      <div style="width:824px;padding:30px 40px 72px;position:relative;left:176px;">
+        <Carrousel/>
+        <FourEntry/>
+        <RecommendPlaylist/>
+      </div>
+    </div>
+    <ControlBar/>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import ControlBar from '@/components/ControlBar'
+import NavList from '@/components/NavList'
+import FourEntry from '@/components/FourEntry'
+import Carrousel from '@/components/Swiper'
+import RecommendPlaylist from '@/components/RecommendPlaylist'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    FourEntry,
+    ControlBar,
+    NavList,
+    Carrousel,
+    RecommendPlaylist
+  },
+  methods: {
+
   }
 }
 </script>
