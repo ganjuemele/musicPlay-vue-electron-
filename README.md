@@ -73,7 +73,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
   static const String playlistSimiUrl_host = "musicapi.leanapp.cn";
   static const String playlistSimiUrl_path = "/simi/playlist";
 
-  // 歌手榜单  http://music.163.com/api/artist/list   http://musicapi.leanapp.cn/artist/list
+  // 歌手榜单  http://music.163.com/api/artist/list
+  // http://musicapi.leanapp.cn/artist/list
   static const String singerRankUrl_host = "musicapi.leanapp.cn";
   static const String singerRankUrl_path = "/artist/list";
 
@@ -81,7 +82,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
   static const String singerTopMusicUrl_host = "music.163.com";
   static const String singerTopMusicUrl_path = "/api/artist/";
 
-  // 歌手专辑列表 http://music.163.com/api/artist/albums/3684  歌手id  http://musicapi.leanapp.cn/artist/album?id=6452&limit=30
+  // 歌手专辑列表 http://music.163.com/api/artist/albums/3684
+  // 歌手id  http://musicapi.leanapp.cn/artist/album?id=6452&limit=30
   static const String singerAlbumUrl_host = "music.163.com";
   static const String singerAlbumUrl_path = "/api/artist/albums/";
 

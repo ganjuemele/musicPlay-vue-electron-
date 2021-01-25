@@ -2,13 +2,13 @@
   <div class="home">
     <div style="display: flex;">
       <NavList/>
-      <div style="width:824px;padding:30px 40px 72px;position:relative;left:176px;">
+      <div style="width:824px;padding:30px 40px 72px;position:fixed;left:176px;">
         <Carrousel/>
         <FourEntry/>
         <RecommendPlaylist/>
       </div>
     </div>
-    <ControlBar/>
+    <ControlBar :playlist="playlist" :isPlay="false"/>
   </div>
 </template>
 
@@ -27,6 +27,12 @@ export default {
     NavList,
     Carrousel,
     RecommendPlaylist
+  },
+  data() {
+    return {
+      playlist: [],
+      isPlay: false
+    }
   },
   methods: {
 

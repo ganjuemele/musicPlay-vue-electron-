@@ -24,6 +24,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  user-select: none;
 }
 
 ul, ol {
@@ -50,5 +51,12 @@ a {
       color: #42b983;
     }
   }
+}
+button {
+  outline: none;
+}
+button:focus {
+  outline: none;
+  border: none;
 }
 </style>

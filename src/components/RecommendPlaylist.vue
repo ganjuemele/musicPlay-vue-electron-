@@ -18,13 +18,15 @@
 
 <script>
 import axios from 'axios'
+import {favPlaylist} from '@/data/data'
+
 export default {
   // https://api.imjad.cn/cloudmusic/?type=playlist&id=5395166307
   // https://music.163.com/playlist?id=3136952023&userid=278357373
   name: 'RecommendPlaylist',
   data() {
     return {
-      id: ['5395166307', '5395166307', '5395166307', '5395166307', '5395166307', '5395166307', '3136952023'],
+      id: favPlaylist,
       playlistCreator: []
     }
   },

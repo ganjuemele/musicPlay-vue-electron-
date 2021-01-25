@@ -5,6 +5,7 @@ function resolve (dir) {
 }
 
 module.exports = {
+  lintOnSave: false,
   publicPath: './',
   devServer: {
     // can be overwritten by process.env.HOST
