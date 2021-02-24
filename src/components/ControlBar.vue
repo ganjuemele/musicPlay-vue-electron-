@@ -21,13 +21,15 @@
     </div>
 
     <div>
-      <audio ref="music" loop autoplay>
-        <source src="https://m8.music.126.net/20210121115925/65c26515a244917cc838f1d725505fc6/ymusic/obj/w5zDlMODwrDDiGjCn8Ky/3984532057/a616/41a6/cc6a/ecab9a71084963bebf463bfabb4cbf98.mp3" type="audio/mpeg">
-      </audio>
+      <audio ref="music"
+             loop
+             controls
+             @click="musicPlayer($refs)"
+             src="../assets/4.mp3"/>
     </div>
     <div class="musicCtrl">
       <div id="prev" @click="prev()"><svg t="1610101043442" class="icon musicCut" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="726" width="200" height="200"><path d="M172.435 908.222l42.94300001 0c20.201 0 36.57599999-16.377 36.57499999-36.575l0-295.68c4.175 3.476 8.786 6.80200001 13.853 9.94l502.84900001 311.527c56.999 35.311 103.634 9.343 103.63599999-57.71l0-654.727c0-67.05400001-46.086-92.15-102.413-55.774l-505.296 326.339c-4.59 2.963-8.795 6.07800001-12.629 9.315l0-310.772c0-20.201-16.371-36.573-36.576-36.57300001l-42.943 1e-8c-20.201 0-36.575 16.373-36.576 36.573l0 717.547c0 20.201 16.377 36.573 36.576 36.57300001z" fill="#707070" p-id="727"></path></svg></div>
-      <div id="play"><svg t="1610102226319" class="icon musicPlay" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="896" width="200" height="200"><path d="M512 0C229.209234 0 0 229.209234 0 512c0 282.78784 229.209234 512 512 512 282.78784 0 512-229.21216 512-512C1024 229.209234 794.78784 0 512 0z m244.993463 553.106286l-305.403612 210.101394a49.95072 49.95072 0 0 1-51.501348 3.086629c-16.398629-8.674743-26.697143-25.678994-26.697143-44.187063V301.898606c0-18.508069 10.298514-35.515246 26.697143-44.189989a49.953646 49.953646 0 0 1 51.501348 3.086629l305.403612 210.098468a49.947794 49.947794 0 0 1 21.612251 41.106286 49.941943 49.941943 0 0 1-21.612251 41.106286z" fill="#ff3300" p-id="897"></path></svg></div>
+      <div id="play" @click="playPause()"><svg t="1610102226319" class="icon musicPlay" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="896" width="200" height="200"><path d="M512 0C229.209234 0 0 229.209234 0 512c0 282.78784 229.209234 512 512 512 282.78784 0 512-229.21216 512-512C1024 229.209234 794.78784 0 512 0z m244.993463 553.106286l-305.403612 210.101394a49.95072 49.95072 0 0 1-51.501348 3.086629c-16.398629-8.674743-26.697143-25.678994-26.697143-44.187063V301.898606c0-18.508069 10.298514-35.515246 26.697143-44.189989a49.953646 49.953646 0 0 1 51.501348 3.086629l305.403612 210.098468a49.947794 49.947794 0 0 1 21.612251 41.106286 49.941943 49.941943 0 0 1-21.612251 41.106286z" fill="#ff3300" p-id="897"></path></svg></div>
       <div id="next" @click="next()"><svg t="1610101055708" class="icon musicCut" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="866" width="200" height="200"><path d="M851.565 115.778l-42.94300001 0c-20.201 0-36.57599999 16.377-36.57499999 36.575l0 295.68c-4.175-3.476-8.786-6.80200001-13.853-9.94l-502.84900001-311.527c-56.999-35.311-103.634-9.343-103.63599999 57.71l0 654.727c0 67.05400001 46.086 92.15 102.413 55.774l505.296-326.339c4.59-2.963 8.795-6.07800001 12.629-9.315l0 310.772c0 20.201 16.371 36.573 36.576 36.57300001l42.943-1e-8c20.201 0 36.575-16.373 36.576-36.573l0-717.547c0-20.201-16.377-36.573-36.576-36.57300001z" fill="#707070" p-id="867"></path></svg></div>
     </div>
 
@@ -57,11 +59,12 @@ export default {
   data() {
     return {
       music: {
-        isPlay: false,
+        isPlay: true,
         currentTime: 0,
         maxTime: 0,
         volume: 50
       },
+      musicName: '1',
       curMusic: {
         picUrl: '',
         name: '',
@@ -69,13 +72,15 @@ export default {
       },
       i: 0 // 歌单的索引值
       // https://api.imjad.cn/cloudmusic/?type=song&id=1406633327
+      // the weeknd  blinding light
     }
   },
   mounted() {
     // this.$nextTick(() => {
     //   setInterval(this.listenMusic, 1000)
     // })
-    console.log(this.props)
+    this.$refs["music"].play();
+    // console.log(this.props)
   },
   updated() {
     console.log('控制条更新')
@@ -121,13 +126,27 @@ export default {
     //   const s = parseInt(it % 60)
     //   return (m < 10 ? '0' : '') + parseInt(it / 60) + ':' + (s < 10 ? '0' : '') + parseInt(it % 60)
     // }
+
+    playPause() {
+      console.log(this.$refs["music"])
+      console.log(this.music.isPlay)
+      if(this.music.isPlay){
+        this.$refs["music"].pause();
+        this.music.isPlay = false;
+      } else {
+        this.$refs["music"].play();
+        this.music.isPlay = true;
+      }
+      // const audio = document.getElementById('play');
+      // audio.currentTime = 0; // 重新播放
+    },
     prev() {
       this.i = this.i - 1
-      console.log(this.i)
+      // console.log(this.i)
     },
     next() {
       this.i = this.i + 1
-      console.log(this.i)
+      // console.log(this.i)
     },
     jumpToCurPlay(e) {
       console.log('去当前播放的歌曲')

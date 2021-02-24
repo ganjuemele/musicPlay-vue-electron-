@@ -1,6 +1,6 @@
 <template>
   <div class="playlistInfo">
-    <div>
+    <div v-if="result.tracks">
       <img class="playlistImg" :src="result.tracks[0].album.picUrl" alt="playlistImg">
       <div style="flex-grow: 1;margin-left:30px;display:flex;flex-direction:column;">
         <p style="font-size:22px;font-weight:600;text-align:left;line-height:22px;">
@@ -8,6 +8,11 @@
           {{result.name}}
         </p>
         <div class="playAll" @click="playTheList()">播放全部</div>
+        <div style="border: 1px solid red;width: 50px;height:50px;background-color: gray;">
+          <audio ref="music" loop autoplay>
+            <source src="https://m8.music.126.net/20210121115925/65c26515a244917cc838f1d725505fc6/ymusic/obj/w5zDlMODwrDDiGjCn8Ky/3984532057/a616/41a6/cc6a/ecab9a71084963bebf463bfabb4cbf98.mp3" type="audio/mpeg">
+          </audio>
+        </div>
       </div>
     </div>
 
@@ -36,7 +41,7 @@
 
 <script>
 export default {
-name: "Playlist"
+  name: "Playlist"
 }
 </script>
 

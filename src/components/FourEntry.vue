@@ -27,10 +27,10 @@ export default {
 
 <style scoped>
   .fourEntry {
-    display: flex;justify-content: space-around;
+    display: flex;
+    justify-content: space-around;
     width: 100%;
     padding: 40px 0;
-    /*border: 1px solid red;*/
     font-size: 16px;
     color: #9f9f9f;
     font-weight: 450;
@@ -43,6 +43,7 @@ export default {
   }
   svg {
     height: 50px;
+    margin: 0 auto 15px;
     width: 50px;
   }
 

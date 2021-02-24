@@ -4,16 +4,22 @@
       <NavList/>
 
       <div style="width:824px;padding:30px 25px 72px;position:fixed;left:176px;background-color: #fff;">
-        <div class="favTab">喜欢的歌手</div>
-
-        <ul style="display: flex;justify-content: flex-start;flex-wrap: wrap;margin-top: 20px">
-          <li class="artist" v-for="(person, index) in artists" :key="index">
-            <div>
-              <img :src="person.img1v1Url" alt=""/>
+        <div class="favTab">收藏的歌手</div>
+        <transition-group
+          name="more"
+          v-bind:css="false"
+          v-on:before-enter="beforeEnter"
+          v-on:enter="enter"
+        >
+          <div class="item" v-for="(item,index) in artists" v-if="show3" :data-index="item" :key="index">
+            <div class="square">
+              <img :src="item.img1v1Url" alt=""/>
             </div>
-            <p>{{person.name}}</p>
-          </li>
-        </ul>
+            <div class="content">
+              {{item.name}}
+            </div>
+          </div>
+        </transition-group>
       </div>
     </div>
 
@@ -35,30 +41,50 @@ export default {
   data() {
     return {
       favArtists,
-      artists: []
+      artists: [],
+      show1: false,
+      show2: false,
+      show3: false,
     }
   },
   created() {
     this.artistsQry()
   },
   mounted() {
-    // console.log(this.artists)
+    console.log(typeof this.artists)
+    setTimeout(()=>{
+      this.show1 = !this.show1
+      this.show2 = !this.show2
+      this.show3 = !this.show3
+    })
   },
   methods: {
     artistsQry() {
-      let that = this
-      favArtists.forEach(item => {
-        setTimeout(
-          axios.get('http://music.163.com/api/artist/' + item.id)
-            .then(response => {
-              let { id, name, img1v1Url } = { ...response.data.artist }
-              that.artists.push({ id, name, img1v1Url })
-              // console.log(that)
+      favArtists.forEach((item, index) => {
+        axios.get('http://music.163.com/api/artist/' + item.id)
+          .then(response => {
+            // console.log(response.data)
+            this.artists.push({
+              name: response.data.artist.name,
+              img1v1Url: response.data.artist.img1v1Url,
+              id: item.id
             })
-            .catch(), 20
-        )
+          })
+          .catch()
       })
-      console.log(this)
+    },
+    beforeEnter (el) {
+      el.style.opacity = 0
+    },
+    enter (el, done) {
+      let delay = el.dataset.index * 2000
+      setTimeout(() => {
+        el.style.transition = 'opacity 2s'
+        el.style.opacity = 1
+        // el.style.animation = 'one-in 4s infinite'
+        // el.style['animation-iteration-count'] = 1
+        done()
+      }, delay)
     }
   }
 }
@@ -66,31 +92,59 @@ export default {
 
 <style scoped>
   .favTab {
-  margin-left: 30px;
-  color: #f33;
-  border-bottom: 3px solid #ff3333;
-  width: 70px;
-  font-weight: bold;
+    margin-left: 30px;
+    color: #f33;
+    border-bottom: 3px solid #f33;
+    width: 80px;
+    font-weight: bold;
+    margin-bottom: 20px;
   }
-  li.artist {
-    margin: 0 9px 30px;
-    /*border: .5px solid red;*/
-  }
-  li.artist div {
-    margin-bottom: 5px;
-    width: 135px;
-    height: 135px;
-    border: .5px solid #f3f3f3;
-    border-radius: 6px;
+  .favTab + span {
+    display: flex;
+    overflow: hidden;
+    flex-wrap: wrap;
   }
 
-  li.artist img {
+  .item {
+    margin: 0 9px 30px;
+    overflow: hidden;
+    width: 136px;
+  }
+  .item img {
     width: 134px;
     height: 134px;
-    border-radius: 6px;
+    display: block;
   }
-  li.artist p {
+  .item::after {
+    content: "";
+    clear: both;
+    display: block;
+  }
+  .square {
+    border: .5px solid #f3f3f3;
+    width: 135px;
+    height: 135px;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .content {
     width: 120px;
+    margin: auto;
+    padding: 10px 0;
+    font-weight: bold;
   }
 
+  /*@keyframes one-in {*/
+  /*  from {*/
+  /*    padding-top: 100px;*/
+  /*    height: 0;*/
+  /*  }*/
+  /*  to {*/
+  /*    padding-top: 0;*/
+  /*    height: 100%;*/
+  /*  }*/
+  /*}*/
 </style>

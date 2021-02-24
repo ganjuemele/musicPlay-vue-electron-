@@ -13,9 +13,11 @@
   },
   "main": "background.js",
   "dependencies": {
+    "@moefe/vue-aplayer": "^2.0.0-beta.5",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "swiper": "^6.4.5",
+    "url-loader": "^4.1.1",
     "vue": "^2.6.11",
     "vue-awesome-swiper": "^4.1.1",
     "vue-router": "^3.2.0",
@@ -60,5 +62,25 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "build": {
+    "fileAssociations": {
+      "ext": [
+        "mp3",
+        "wav",
+        "flac",
+        "ogg",
+        "m4a"
+      ],
+      "name": "music",
+      "role": "Editor"
+    },
+    "mac": {
+      "extendInfo": {
+        "CFBundleURLSchemes": [
+          "protocol"
+        ]
+      }
+    }
+  }
 }
