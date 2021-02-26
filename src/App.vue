@@ -1,12 +1,22 @@
 <template>
   <div id="app">
-<!--    <div id="nav">-->
-<!--      <router-link to="/">12345</router-link> |-->
-<!--      <router-link to="/about">About</router-link>-->
-<!--    </div>-->
+    <NavList/>
+
     <router-view/>
+
+    <ControlBar/>
   </div>
 </template>
+
+<script>
+import ControlBar from '@/components/ControlBar'
+import NavList from '@/components/NavList'
+
+export default {
+  name: 'App',
+  components: {NavList, ControlBar},
+}
+</script>
 
 <style lang="scss">
 #app {

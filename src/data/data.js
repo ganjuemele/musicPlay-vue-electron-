@@ -10,6 +10,12 @@ export const favArtists = [
   {name: 'Harry Styles', id: 12355573},
   {name: 'Jason Derulo', id: 35511},
   {name: 'Taylor Swift', id: 44266},
+  {name: 'Justin Bieber', id: 35531},
+  {name: 'The Weeknd', id: 185858},
+  {name: 'Dua Lipa', id: 1135086},
+  {name: 'Harry Styles', id: 12355573},
+  {name: 'Jason Derulo', id: 35511},
+  {name: 'Taylor Swift', id: 44266},
   {name: 'Justin Bieber', id: 35531}
 ]
 

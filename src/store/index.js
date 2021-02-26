@@ -6,14 +6,25 @@ Vue.use(Vuex,APlayer)
 
 export default new Vuex.Store({
   state: {
-    playlist: []
+    playlist: [],
+    musicUrl: "../assets/4.mp3",
+    curMusicInfo: {
+      imgUrl: '',
+      musicUrl: '',
+      id: 0,
+      name: '',
+      artists: ''
+    }
   },
   getters: {
     getPlaylist: state => state.playlist
   },
   mutations: {
-    setPlaylist(state, value) {
+    setPlaylist (state, value) {
       state.playlist = value
+    },
+    setMusicInfo (state, value) {
+      state.curMusicInfo = value
     }
   },
   actions: {

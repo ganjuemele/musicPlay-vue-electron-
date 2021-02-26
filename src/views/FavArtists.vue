@@ -1,9 +1,9 @@
 <template>
   <div class="home">
     <div style="display: flex;">
-      <NavList/>
+<!--      <NavList/>-->
 
-      <div style="width:824px;padding:30px 25px 72px;position:fixed;left:176px;background-color: #fff;">
+      <div style="width:824px;padding:30px 25px 72px;position:absolute;left:176px;background-color: #fff;">
         <div class="favTab">收藏的歌手</div>
         <transition-group
           name="more"
@@ -11,7 +11,7 @@
           v-on:before-enter="beforeEnter"
           v-on:enter="enter"
         >
-          <div class="item" v-for="(item,index) in artists" v-if="show3" :data-index="item" :key="index">
+          <div @click="" class="item" v-for="(item,index) in artists" v-if="show3" :data-index="item" :key="index">
             <div class="square">
               <img :src="item.img1v1Url" alt=""/>
             </div>
@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <ControlBar/>
+<!--    <ControlBar/>-->
   </div>
 </template>
 

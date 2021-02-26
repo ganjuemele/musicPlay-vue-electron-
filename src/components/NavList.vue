@@ -4,7 +4,7 @@
       <p>我的音乐</p>
       <ul>
         <li class="selected" v-for="(item, index) in asideList" :key="index">
-          <router-link :to="item.url">{{item.name}}</router-link>
+          <router-link :to="item.url" class="selected">{{item.name}}</router-link>
         </li>
 <!--        <li>-->
 <!--          <router-link to="/#">-->
@@ -50,25 +50,25 @@ export default {
     height: 18px;
     width: 18px;
   }
-  li {
-    padding: 10px 0 10px 15px;
-    height: 36px;
+  li a{
+    padding: 10px 20px 10px 15px;
     color: #333;
-    border: #ddd .5px solid;
+    margin: 3px 0;
     display: flex;
     justify-content: start;
     align-items: center;
     border-radius: 3px;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
   }
-  li:hover {
+  li a:hover {
     background-color: red!important;
+    text-decoration: none;
   }
-  li.selected {
+  li a.selected {
     background-color: orangered;
     color: #fff;
-  }
-  li > a {
-    display: flex;
   }
   aside > div:last-child > p {
     color: #888;

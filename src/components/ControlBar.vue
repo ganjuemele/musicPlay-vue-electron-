@@ -3,12 +3,12 @@
     <div style="display: flex;align-items: center;min-width:410px">
       <div class="musicImg" @click="jumpToCurPlay()">
 <!--        <router-link to="/curPlay">-->
-          <img :src="curMusic.picUrl||''" alt=""/>
+          <img :src="curMusicInfo.imgUrl||''" alt=""/>
 <!--        </router-link>-->
       </div>
       <div class="musicName">
-        <p>{{curMusic.name||'听.见不同'}}</p>
-        <p>{{curMusic.artistsName || ''}}</p>
+        <p>{{curMusicInfo.name||'听.见不同'}}</p>
+        <p>{{curMusicInfo.artists || ''}}</p>
       </div>
       <div class="musicQuality">{{'标准'||'SQ'}}</div>
       <div class="musicLike">
@@ -23,13 +23,15 @@
     <div>
       <audio ref="music"
              loop
-             controls
              @click="musicPlayer($refs)"
-             src="../assets/4.mp3"/>
+             :src='getMusicInfo.musicUrl||"../assets/4.mp3"'/>
     </div>
     <div class="musicCtrl">
       <div id="prev" @click="prev()"><svg t="1610101043442" class="icon musicCut" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="726" width="200" height="200"><path d="M172.435 908.222l42.94300001 0c20.201 0 36.57599999-16.377 36.57499999-36.575l0-295.68c4.175 3.476 8.786 6.80200001 13.853 9.94l502.84900001 311.527c56.999 35.311 103.634 9.343 103.63599999-57.71l0-654.727c0-67.05400001-46.086-92.15-102.413-55.774l-505.296 326.339c-4.59 2.963-8.795 6.07800001-12.629 9.315l0-310.772c0-20.201-16.371-36.573-36.576-36.57300001l-42.943 1e-8c-20.201 0-36.575 16.373-36.576 36.573l0 717.547c0 20.201 16.377 36.573 36.576 36.57300001z" fill="#707070" p-id="727"></path></svg></div>
-      <div id="play" @click="playPause()"><svg t="1610102226319" class="icon musicPlay" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="896" width="200" height="200"><path d="M512 0C229.209234 0 0 229.209234 0 512c0 282.78784 229.209234 512 512 512 282.78784 0 512-229.21216 512-512C1024 229.209234 794.78784 0 512 0z m244.993463 553.106286l-305.403612 210.101394a49.95072 49.95072 0 0 1-51.501348 3.086629c-16.398629-8.674743-26.697143-25.678994-26.697143-44.187063V301.898606c0-18.508069 10.298514-35.515246 26.697143-44.189989a49.953646 49.953646 0 0 1 51.501348 3.086629l305.403612 210.098468a49.947794 49.947794 0 0 1 21.612251 41.106286 49.941943 49.941943 0 0 1-21.612251 41.106286z" fill="#ff3300" p-id="897"></path></svg></div>
+      <div id="play" @click="playPause()">
+        <svg t="1614312605373" v-if="music.isPlay" class="icon musicPlay" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1078" width="200" height="200"><path d="M512 0C230.4 0 0 230.4 0 512s230.4 512 512 512 512-230.4 512-512S793.6 0 512 0z m-51.2 716.8H358.4V307.2h102.4v409.6z m204.8 0H563.2V307.2h102.4v409.6z" fill="#ff3300" p-id="1079"></path></svg>
+        <svg t="1610102226319" v-if="!music.isPlay" class="icon musicPlay" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="896" width="200" height="200"><path d="M512 0C229.209234 0 0 229.209234 0 512c0 282.78784 229.209234 512 512 512 282.78784 0 512-229.21216 512-512C1024 229.209234 794.78784 0 512 0z m244.993463 553.106286l-305.403612 210.101394a49.95072 49.95072 0 0 1-51.501348 3.086629c-16.398629-8.674743-26.697143-25.678994-26.697143-44.187063V301.898606c0-18.508069 10.298514-35.515246 26.697143-44.189989a49.953646 49.953646 0 0 1 51.501348 3.086629l305.403612 210.098468a49.947794 49.947794 0 0 1 21.612251 41.106286 49.941943 49.941943 0 0 1-21.612251 41.106286z" fill="#ff3300" p-id="897"></path></svg>
+      </div>
       <div id="next" @click="next()"><svg t="1610101055708" class="icon musicCut" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="866" width="200" height="200"><path d="M851.565 115.778l-42.94300001 0c-20.201 0-36.57599999 16.377-36.57499999 36.575l0 295.68c-4.175-3.476-8.786-6.80200001-13.853-9.94l-502.84900001-311.527c-56.999-35.311-103.634-9.343-103.63599999 57.71l0 654.727c0 67.05400001 46.086 92.15 102.413 55.774l505.296-326.339c4.59-2.963 8.795-6.07800001 12.629-9.315l0 310.772c0 20.201 16.371 36.573 36.576 36.57300001l42.943-1e-8c20.201 0 36.575-16.373 36.576-36.573l0-717.547c0-20.201-16.377-36.573-36.576-36.57300001z" fill="#707070" p-id="867"></path></svg></div>
     </div>
 
@@ -50,14 +52,16 @@
 export default {
   name: 'ControlBar',
   props: {
-    playlist: {
-      type: Array,
-      default: function() { return [] }
-    },
-    isPlay: Boolean
+    // playlist: {
+    //   type: Array,
+    //   default: function() { return [] }
+    // },
+    // isPlay: Boolean
   },
   data() {
     return {
+      playlist: [],
+      curMusicInfo: {},
       music: {
         isPlay: true,
         currentTime: 0,
@@ -80,7 +84,6 @@ export default {
     //   setInterval(this.listenMusic, 1000)
     // })
     this.$refs["music"].play();
-    // console.log(this.props)
   },
   updated() {
     console.log('控制条更新')
@@ -102,10 +105,10 @@ export default {
     //   } else {
     //     this.$refs.music.pause()
     //   }
-    //   this.music.isPlay = !this.$refs.music.paused
-    // this.$nextTick(() => {
-    //   document.getElementById('play').blur()
-    // })
+    //   this.music.isPlay = !this.$refs.music.paused;
+    //   this.$nextTick(() => {
+    //     document.getElementById('play').blur()
+    //   })
     // },
     // changeTime(time) {
     //   this.$refs.music.currentTime = time
@@ -128,8 +131,6 @@ export default {
     // }
 
     playPause() {
-      console.log(this.$refs["music"])
-      console.log(this.music.isPlay)
       if(this.music.isPlay){
         this.$refs["music"].pause();
         this.music.isPlay = false;
@@ -158,8 +159,22 @@ export default {
       })
     }
   },
+  computed: {
+    getMusicInfo () {
+      return this.$store.state.curMusicInfo
+    },
+    getPlayList() {
+      console.log('playlist', 1)
+      return this.$store.state.playlist
+    }
+  },
   watch: {
-    // i: function() {}
+    getMusicInfo: {
+      handler () {
+        this.curMusicInfo = this.$store.state.curMusicInfo
+      },
+      deep: true
+    }
   }
 }
 </script>

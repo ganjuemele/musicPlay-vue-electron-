@@ -46,7 +46,7 @@ export default {
       })
     },
     jumpToInfo(e) {
-      console.log(this.$router)
+      // console.log(this.$router)
       this.$router.push({
         name: 'PlaylistInfo',
         params: {

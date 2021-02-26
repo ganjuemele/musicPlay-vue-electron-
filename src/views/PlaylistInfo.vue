@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div style="display: flex;">
-      <NavList/>
+<!--      <NavList/>-->
 
 <!--      <Playlist/>-->
       <div class="playlistInfo">
@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <ControlBar ref="playlist" :isPlay="isPlay"/>
+<!--    <ControlBar ref="playlist" :isPlay="isPlay"/>-->
 
   </div>
 </template>
@@ -56,14 +56,15 @@ import axios from 'axios'
 
 export default {
   name: 'Playlist',
-  components: {NavList, ControlBar},
+  // components: {NavList, ControlBar},
   data() {
     return {
       id: '' || '5395166307',
       result: {},
       playlist: '[]',
       musicUrl: '',
-      isPlay: false
+      isPlay: false,
+      curMusicInfo: {}
     }
   },
   created() {
@@ -91,23 +92,32 @@ export default {
     playTheList() {
       this.playlist = this.result.tracks
       // this.isPlay = true
+      // console.log(this.result.tracks)
       this.$store.commit('setPlaylist', this.result.tracks)
+      console.log(this.$store.state.playlist)
       // this.$forceUpdate()
     },
     doubleClickPlay(e) {
-      console.log(e.id)
       let that = this;
       axios
         .get('https://api.imjad.cn/cloudmusic/?type=song&id=' + e.id)
         .then(response => {
-          console.log(response.data.data[0].url)
-          that.musicUrl = response.data.data[0].url
+          that.musicUrl = response.data.data[0].url;
+          console.log('mp3地址', that.musicUrl)
+          that.curMusicInfo = {
+            id: e.id,
+            name: e.name,
+            index: e.index,
+            musicUrl: that.musicUrl,
+            imgUrl: e.album.blurPicUrl,
+            artists: e.artists[0].name
+          };
         })
         .catch()
     },
-    musicPlayer(e) {
-      console.log(e)
-    }
+    // musicPlayer(e) {
+    //   console.log(e)
+    // }
   },
   watch: {
     playlist: {
@@ -118,6 +128,7 @@ export default {
       deep: true
     },
     musicUrl() {
+      this.$store.commit('setMusicInfo', this.curMusicInfo)
       console.log('音频地址变了')
     }
   }

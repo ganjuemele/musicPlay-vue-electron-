@@ -7,15 +7,15 @@
       </div>
     </div>
 
-    <ControlBar ref="playlist" :isPlay="isPlay"/>
+<!--    <ControlBar ref="playlist" :isPlay="isPlay"/>-->
   </div>
 </template>
 
 <script>
-import ControlBar from '@/components/ControlBar'
+// import ControlBar from '@/components/ControlBar'
 export default {
   name: 'CurPlay',
-  components: {ControlBar},
+  // components: {ControlBar},
   created() {
     console.log('hhh')
   }
