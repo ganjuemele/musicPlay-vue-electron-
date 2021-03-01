@@ -91,10 +91,8 @@ export default {
     },
     playTheList() {
       this.playlist = this.result.tracks
-      // this.isPlay = true
-      // console.log(this.result.tracks)
       this.$store.commit('setPlaylist', this.result.tracks)
-      console.log(this.$store.state.playlist)
+      // console.log(this.$store.state.playlist)
       // this.$forceUpdate()
     },
     doubleClickPlay(e) {
@@ -103,7 +101,7 @@ export default {
         .get('https://api.imjad.cn/cloudmusic/?type=song&id=' + e.id)
         .then(response => {
           that.musicUrl = response.data.data[0].url;
-          console.log('mp3地址', that.musicUrl)
+          // console.log('mp3地址', that.musicUrl)
           that.curMusicInfo = {
             id: e.id,
             name: e.name,
@@ -129,7 +127,7 @@ export default {
     },
     musicUrl() {
       this.$store.commit('setMusicInfo', this.curMusicInfo)
-      console.log('音频地址变了')
+      // console.log('音频地址变了')
     }
   }
 }
