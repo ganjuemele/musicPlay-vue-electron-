@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <div style="display: flex;">
-<!--      <NavList/>-->
 
       <div style="width:824px;padding:30px 25px 72px;position:absolute;left:176px;background-color: #fff;">
         <div class="favTab">收藏的歌手</div>
@@ -23,7 +22,6 @@
       </div>
     </div>
 
-<!--    <ControlBar/>-->
   </div>
 </template>
 

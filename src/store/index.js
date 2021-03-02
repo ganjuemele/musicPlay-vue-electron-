@@ -13,7 +13,8 @@ export default new Vuex.Store({
       musicUrl: '',
       id: 0,
       name: '',
-      artists: ''
+      artists: '',
+      albumName: ''
     }
   },
   getters: {

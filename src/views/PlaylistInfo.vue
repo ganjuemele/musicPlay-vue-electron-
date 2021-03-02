@@ -48,8 +48,8 @@
 </template>
 
 <script>
-import ControlBar from '@/components/ControlBar'
-import NavList from '@/components/NavList'
+// import ControlBar from '@/components/ControlBar'
+// import NavList from '@/components/NavList'
 // import { APlayer } from '@moefe/vue-aplayer';
 // import Playlist from '@/components/Playlist'
 import axios from 'axios'
@@ -107,15 +107,13 @@ export default {
             name: e.name,
             index: e.index,
             musicUrl: that.musicUrl,
+            albumName: e.album.name,
             imgUrl: e.album.blurPicUrl,
             artists: e.artists[0].name
-          };
+          }
         })
         .catch()
     },
-    // musicPlayer(e) {
-    //   console.log(e)
-    // }
   },
   watch: {
     playlist: {
