@@ -48,15 +48,10 @@
 </template>
 
 <script>
-// import ControlBar from '@/components/ControlBar'
-// import NavList from '@/components/NavList'
-// import { APlayer } from '@moefe/vue-aplayer';
-// import Playlist from '@/components/Playlist'
 import axios from 'axios'
 
 export default {
   name: 'Playlist',
-  // components: {NavList, ControlBar},
   data() {
     return {
       id: '' || '5395166307',

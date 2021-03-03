@@ -1,41 +1,29 @@
 <template>
-  <div class="home">
-    <div style="display: flex;">
-
-      <div style="width:824px;padding:30px 25px 72px;position:absolute;left:176px;background-color: #fff;">
-        <div class="favTab">收藏的歌手</div>
-        <transition-group
-          name="more"
-          v-bind:css="false"
-          v-on:before-enter="beforeEnter"
-          v-on:enter="enter"
-        >
-          <div @click="" class="item" v-for="(item,index) in artists" v-if="show3" :data-index="item" :key="index">
-            <div class="square">
-              <img :src="item.img1v1Url" alt=""/>
-            </div>
-            <div class="content">
-              {{item.name}}
-            </div>
+    <div style="width:824px;padding:30px 25px 72px;position:absolute;left:176px;background-color: #fff;">
+      <div class="favTab">收藏的歌手</div>
+      <transition-group
+        name="more"
+        v-bind:css="false"
+        v-on:before-enter="beforeEnter"
+        v-on:enter="enter"
+      >
+        <div @click="jumpToArtist(item)" class="item" v-for="(item,index) in artists" v-if="show3" :data-index="item" :key="index">
+          <div class="square">
+            <img :src="item.img1v1Url" alt=""/>
           </div>
-        </transition-group>
-      </div>
+          <div class="content">
+            {{item.name}}
+          </div>
+        </div>
+      </transition-group>
     </div>
-
-  </div>
 </template>
 
 <script>
-import ControlBar from '@/components/ControlBar'
-import NavList from '@/components/NavList'
 import { favArtists } from '@/data/data'
 import axios from 'axios'
 export default {
   name: 'FavArtists',
-  components: {NavList, ControlBar},
-  props() {
-    // isPlay: Boolean
-  },
   data() {
     return {
       favArtists,
@@ -49,7 +37,7 @@ export default {
     this.artistsQry()
   },
   mounted() {
-    console.log(typeof this.artists)
+    // console.log(this.artists)
     setTimeout(()=>{
       this.show1 = !this.show1
       this.show2 = !this.show2
@@ -71,18 +59,29 @@ export default {
           .catch()
       })
     },
-    beforeEnter (el) {
+    beforeEnter(el) {
       el.style.opacity = 0
     },
-    enter (el, done) {
-      let delay = el.dataset.index * 2000
+    enter(el, done) {
+      let delay = el.dataset.index * 2000;
       setTimeout(() => {
-        el.style.transition = 'opacity 2s'
-        el.style.opacity = 1
-        // el.style.animation = 'one-in 4s infinite'
-        // el.style['animation-iteration-count'] = 1
+        el.style.transition = 'opacity 2s';
+        el.style.opacity = 1;
+        // el.style.animation = 'one-in 4s infinite';
+        // el.style['animation-iteration-count'] = 1;
         done()
       }, delay)
+    },
+    jumpToArtist(e) {
+      let that = this;
+      this.$router.push({
+        name: 'Artist',
+        params: {
+          id: e.id,
+          name: e.name,
+          img1v1Url: e.img1v1Url
+        }
+      })
     }
   }
 }

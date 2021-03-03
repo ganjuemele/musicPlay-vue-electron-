@@ -1,11 +1,9 @@
 <template>
-  <div class="home">
-    <div style="display: flex;">
-      <div style="width:824px;padding:30px 40px 72px;position:absolute;left:176px;">
-        <Carrousel/>
-        <FourEntry/>
-        <RecommendPlaylist/>
-      </div>
+  <div class="home" style="display: flex;">
+    <div style="width:824px;padding:30px 40px 72px;position:absolute;left:176px;background-color: #fff;">
+      <Carrousel/>
+      <FourEntry/>
+      <RecommendPlaylist/>
     </div>
   </div>
 </template>

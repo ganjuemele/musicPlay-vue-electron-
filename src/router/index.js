@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import PlaylistInfo from '../views/PlaylistInfo'
 import FavArtists from '../views/FavArtists'
 import CurPlay from '../views/CurPlay'
+import Artist from '../views/Artist'
 
 Vue.use(VueRouter)
 
@@ -32,6 +33,10 @@ const routes = [
     path: '/curPlay',
     name: 'CurPlay',
     component: CurPlay
+  }, {
+    path: '/artist/:id',
+    name: 'Artist',
+    component: Artist
   }
 ]
 
