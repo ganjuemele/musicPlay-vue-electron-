@@ -10,10 +10,11 @@
       </div>
     </div>
 
-    <div class="artist-nav">
-      <div>歌手详情</div>
-      <div>专辑</div>
-    </div>
+    <Tags class-prefix="artist"
+          :bars="['歌手详情', '专辑']"
+          :tagsIndex.sync="tagsIndex"
+    />
+
     <div>
       <div class="title">{{passData.name}}简介</div>
       <div class="content">{{detail.briefDesc}}</div>
@@ -28,12 +29,16 @@
 
 <script>
 import axios from 'axios';
+import Tags from '@/components/Tags'
+
 export default {
   name: 'Artist',
+  components: { Tags },
   data() {
     return {
       passData: this.$route.params,
-      detail: {}
+      detail: {},
+      tagsIndex: 0
     }
   },
   created() {
@@ -44,12 +49,11 @@ export default {
       let that = this;
       axios.get('http://musicapi.leanapp.cn/artist/desc?id=' + that.passData.id)
         .then( response => {
-          that.detail = response.data
+          that.detail = response.data;
           response.data.introduction.forEach( (item, index) => {
             that.detail.introduction[index].txtArr = item.txt.split('\n')
-            // console.log(txtArr)
           })
-          console.log(that.detail)
+          // console.log(that.detail)
         })
         .catch()
     }
@@ -84,19 +88,22 @@ export default {
     }
   }
 
-  .artist-nav {
-    display: flex;
-    border-bottom: #efefef 1px solid;
-    color: #000;
-    > div {
-      padding-bottom: 5px;
-      border-bottom: 2px solid red;
-      margin: 0 20px;
-    }
-    > div:first-child {
-      margin: 0;
-    }
-  }
+  //.artist-bars {
+  //  display: flex;
+  //  border-bottom: #efefef 1px solid;
+  //  color: #000;
+  //  &-item {
+  //
+  //  }
+  //  > div {
+  //    padding-bottom: 5px;
+  //    border-bottom: 2px solid red;
+  //    margin: 0 20px;
+  //  }
+  //  > div:first-child {
+  //    margin: 0;
+  //  }
+  //}
 
   .title {
     color: #000;

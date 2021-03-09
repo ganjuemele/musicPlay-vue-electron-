@@ -44,15 +44,28 @@ ul, ol {
 a {
   text-decoration: none;
   color: inherit;
-  &:hover {
-    border-bottom: 1px solid;
-    cursor: pointer;
-  }
+}
+a:hover {
+  border-bottom: 1px solid;
+  cursor: pointer;
+  //text-decoration: underline;
+  text-decoration: none;
+}
+a:link {
+  text-decoration: none;
+}
+a:visited {
+  text-decoration: none;
+}
+a:active {
+  text-decoration: none;
+}
+a:focus {
+  text-decoration: none;
 }
 
 #nav {
   padding: 30px;
-
   a {
     font-weight: bold;
     color: #2c3e50;

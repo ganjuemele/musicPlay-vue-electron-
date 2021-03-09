@@ -8,9 +8,9 @@
     <ul>
       <li v-for="(item, index) in playlistCreator" :key="'playlist' + index" @click="jumpToInfo(id[index])">
         <div>
-          <img :src="item.backgroundUrl" alt=""/>
+          <img :src="item.coverImgUrl" alt=""/>
         </div>
-        <router-link to="/#">{{item.description}}</router-link>
+        <router-link to="/#">{{item.name}}</router-link>
       </li>
     </ul>
   </div>
@@ -18,7 +18,7 @@
 
 <script>
 import axios from 'axios'
-import {favPlaylist} from '@/data/data'
+// import {favPlaylist} from '@/data/data'
 
 export default {
   // https://api.imjad.cn/cloudmusic/?type=playlist&id=5395166307
@@ -26,7 +26,7 @@ export default {
   name: 'RecommendPlaylist',
   data() {
     return {
-      id: favPlaylist,
+      id: [],
       playlistCreator: []
     }
   },
@@ -37,13 +37,18 @@ export default {
     // 歌单请求接口
     playlistQry() {
       const that = this;
-      this.id.forEach(id => {
-        axios.get('http://music.163.com/api/playlist/detail?id=' + id)
-          .then(response => {
-            that.playlistCreator = that.playlistCreator.concat(response.data.result.creator)
-          })
-          .catch()
-      })
+      axios.get('http://musicapi.leanapp.cn/top/playlist/highquality')
+        .then(res => {
+          that.playlistCreator = res.data.playlists.slice(0,7)
+          // res.data.playlists.forEach( item => {
+          //   axios.get('http://music.163.com/api/playlist/detail?id=' + item.id)
+          //     .then(response => {
+          //       that.playlistCreator = that.playlistCreator.concat(res.data.playlists)
+          //     })
+          //     .catch()
+          // })
+        })
+        .catch()
     },
     jumpToInfo(e) {
       this.$router.push({
@@ -66,7 +71,7 @@ ul {
 
 li {
   width: 168px;
-  height: 248px;
+  height: 215px;
   margin-bottom: 30px;
 }
 li img {

@@ -19,10 +19,10 @@ export const favArtists = [
   {name: 'Justin Bieber', id: 35531}
 ]
 
-export const favPlaylist = [
-  '5395166307', '5395166307', '5395166307',
-  '5395166307', '5395166307', '5395166307', '3136952023'
-]
+// export const favPlaylist = [
+//   '5395166307', '5395166307', '5395166307',
+//   '5395166307', '5395166307', '5395166307', '3136952023'
+// ]
 
 export const asideList = [
   {url: '/home', name: '发现音乐'},
@@ -33,6 +33,5 @@ export const asideList = [
 ]
 
 export default {
-  favArtists,
-  asideList
+  favArtists, asideList
 }

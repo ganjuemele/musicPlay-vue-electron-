@@ -1,6 +1,10 @@
 <template>
     <div style="width:824px;padding:30px 25px 72px;position:absolute;left:176px;background-color: #fff;">
-      <div class="favTab">收藏的歌手</div>
+<!--      <div class="favTab">收藏的歌手</div>-->
+      <Tags class-prefix="fav"
+            :bars="['收藏的歌手', '收藏的歌单']"
+            :tagsIndex.sync="tagsIndex"
+      />
       <transition-group
         name="more"
         v-bind:css="false"
@@ -21,9 +25,12 @@
 
 <script>
 import { favArtists } from '@/data/data'
+import Tags from '@/components/Tags'
 import axios from 'axios'
+
 export default {
   name: 'FavArtists',
+  components: { Tags },
   data() {
     return {
       favArtists,
@@ -31,13 +38,13 @@ export default {
       show1: false,
       show2: false,
       show3: false,
+      tagsIndex: 0
     }
   },
   created() {
     this.artistsQry()
   },
   mounted() {
-    // console.log(this.artists)
     setTimeout(()=>{
       this.show1 = !this.show1
       this.show2 = !this.show2
@@ -87,23 +94,20 @@ export default {
 }
 </script>
 
-<style scoped>
-  .favTab {
-    margin-left: 30px;
-    color: #f33;
-    border-bottom: 3px solid #f33;
-    width: 80px;
+<style lang="scss" scoped>
+  ::v-deep .fav-tab {
     font-weight: bold;
     margin-bottom: 20px;
-  }
-  .favTab + span {
-    display: flex;
-    overflow: hidden;
-    flex-wrap: wrap;
+    + span {
+      display: flex;
+      overflow: hidden;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
   }
 
   .item {
-    margin: 0 9px 30px;
+    margin-bottom: 30px;
     overflow: hidden;
     width: 136px;
   }
