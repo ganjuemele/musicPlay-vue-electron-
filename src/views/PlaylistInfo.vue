@@ -118,7 +118,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   .playlistInfo {
     background-color: #fff;
     width: 824px;
@@ -127,33 +127,33 @@ export default {
     left: 176px;
     border: 1px solid #fff;
     height: calc(100vh - 75px);
-  }
-  .playlistInfo > div:first-child {
-    display: flex;
-    padding: 0 30px;
-    width: 100%;
-  }
-  .playlistInfo > div:last-child {
-    width: 100%;
-    /*margin-top: 30px;*/
-  }
-  .playlistImg {
-    display: block;
-    width: 200px;
-    border-radius: 10px;
-    height: 200px;
-  }
-  .playAll {
-    color: #fff;
-    background-color: orangered;
-    width: 160px;
-    font-weight: 500;
-    line-height: 30px;
-    border-radius: 15px;
-    margin-top: 10px;
-  }
-  .playAll:hover {
-    background-color: red;
+
+    & > div:first-child {
+      display: flex;
+      padding: 0 30px;
+      width: 100%;
+    }
+    & > div:last-child {
+      width: 100%;
+    }
+    .playlistImg {
+      display: block;
+      width: 200px;
+      border-radius: 10px;
+      height: 200px;
+    }
+    & .playAll {
+      color: #fff;
+      background-color: orangered;
+      width: 160px;
+      font-weight: 500;
+      line-height: 30px;
+      border-radius: 15px;
+      margin-top: 10px;
+    }
+    & .playAll:hover {
+      background-color: red;
+    }
   }
   .listTitle {
     display: flex;
@@ -166,16 +166,15 @@ export default {
     font-weight: 450;
     color: #999;
     border-top: #ddd 1px solid;
-  }
-  .listTitle > div {
-    justify-content: flex-end;
-    padding: 0 4px;
+    & > div {
+      justify-content: flex-end;
+      padding: 0 4px;
+    }
   }
   .playlist-tab {
     margin-left: 30px;
     margin-top: 30px;
     border: none;
-    width: 70px;
     font-weight: bold;
   }
   div.playlist {
@@ -183,50 +182,48 @@ export default {
     justify-content: flex-end;
     text-align: left;
     padding: 0 20px;
+    & svg {
+      width: 16px;
+      height: 16px;
+    }
+    & .fav {
+      display: flex;
+      align-items: center;
+      height: 34px;
+      width: 32px;
+      justify-content: center;
+    }
+    & .serialNum {
+      text-align: center;
+      flex-grow: 1;
+    }
+    & > div {
+      line-height: 34px;
+      height: 34px;
+      font-size: 12px;
+      color: #000;
+      padding: 0 4px;
+      align-items: center;
+      display: -webkit-box;
+      overflow: hidden;
+      text-overflow: unset;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+    }
   }
   div.playlist:hover {
     background-color: #eee!important;
   }
-  div.playlist > div {
-    line-height: 34px;
-    height: 34px;
-    font-size: 12px;
-    color: #000;
-    padding: 0 4px;
-  }
-  div.playlist svg {
-    width: 16px;
-    height: 16px;
-  }
-  div.playlist > div {
-    align-items: center;
-    display: -webkit-box;
-    overflow: hidden;
-    text-overflow: unset;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-  }
-  div.playlist .serialNum {
-    text-align: center;
-    flex-grow: 1;
-  }
-  div.playlist .fav {
-    display: flex;
-    align-items: center;
-    height: 34px;
-    width: 32px;
-    justify-content: center;
-  }
-  div.name {
+  .name {
     width: 284px;
   }
-  div.artists {
+  .artists {
     width: 160px;
   }
-  div.album {
+  .album {
     width: 170px;
   }
-  div.duration {
+  .duration {
     width: 80px;
   }
 </style>

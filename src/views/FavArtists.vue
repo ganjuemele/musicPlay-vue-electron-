@@ -1,8 +1,7 @@
 <template>
     <div style="width:824px;padding:30px 25px 72px;position:absolute;left:176px;background-color: #fff;">
-<!--      <div class="favTab">收藏的歌手</div>-->
       <Tags class-prefix="fav"
-            :bars="['收藏的歌手', '收藏的歌单']"
+            :bars="['收藏的歌手', '收藏的歌曲', '收藏的歌单']"
             :tagsIndex.sync="tagsIndex"
       />
       <transition-group
@@ -95,6 +94,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+//$a = 0
   ::v-deep .fav-tab {
     font-weight: bold;
     margin-bottom: 20px;
@@ -102,42 +102,43 @@ export default {
       display: flex;
       overflow: hidden;
       flex-wrap: wrap;
-      justify-content: space-between;
     }
   }
 
   .item {
     margin-bottom: 30px;
     overflow: hidden;
-    width: 136px;
+    margin-right: 26px;
+    & img {
+      width: 134px;
+      height: 134px;
+      display: block;
+    }
+    & .square {
+      border: .5px solid #f3f3f3;
+      width: 134px;
+      height: 134px;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    & .content {
+      width: 120px;
+      margin: auto;
+      padding: 10px 0;
+      font-weight: bold;
+    }
   }
-  .item img {
-    width: 134px;
-    height: 134px;
-    display: block;
+  .item:nth-child(5n) {
+    margin-right: 0;
   }
   .item::after {
     content: "";
     clear: both;
     display: block;
   }
-  .square {
-    border: .5px solid #f3f3f3;
-    width: 135px;
-    height: 135px;
-    border-radius: 8px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .content {
-    width: 120px;
-    margin: auto;
-    padding: 10px 0;
-    font-weight: bold;
-  }
-
   /*@keyframes one-in {*/
   /*  from {*/
   /*    padding-top: 100px;*/

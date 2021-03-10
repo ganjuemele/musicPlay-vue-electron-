@@ -41,12 +41,12 @@ export default {
 
   &-item {
     padding-bottom: 5px;
-    margin: 0 20px;
+    margin-right: 20px;
   }
 
-  &-item:first-child {
-    margin: 0;
-  }
+  //&-item:first-child {
+  //  margin: 0;
+  //}
   .selected {
     border-bottom: 2px solid #f33;
     color: #f33;

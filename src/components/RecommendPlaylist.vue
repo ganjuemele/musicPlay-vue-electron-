@@ -6,7 +6,7 @@
     </div>
 
     <ul>
-      <li v-for="(item, index) in playlistCreator" :key="'playlist' + index" @click="jumpToInfo(id[index])">
+      <li v-for="(item, index) in playlistCreator" :key="'playlist' + index" @click="jumpToInfo(item.id)">
         <div>
           <img :src="item.coverImgUrl" alt=""/>
         </div>
@@ -18,11 +18,9 @@
 
 <script>
 import axios from 'axios'
-// import {favPlaylist} from '@/data/data'
 
 export default {
   // https://api.imjad.cn/cloudmusic/?type=playlist&id=5395166307
-  // https://music.163.com/playlist?id=3136952023&userid=278357373
   name: 'RecommendPlaylist',
   data() {
     return {

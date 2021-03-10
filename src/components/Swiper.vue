@@ -59,15 +59,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .swiper-container {
-  /*border: 1px solid red;*/
-  width: 70vw;
-  /*min-width: calc(100vw - 176px);*/
-  /*height: 300px;*/
-}
-.swiper-container img {
-  width: 54vw;
-  border-radius: 10px;
+  width: 100%;
+  & img {
+    width: 540px;
+    border-radius: 10px;
+  }
 }
 </style>

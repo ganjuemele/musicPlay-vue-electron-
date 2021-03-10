@@ -4,9 +4,9 @@
       <img :src="passData.img1v1Url" alt=""/>
       <div>
         <div class="name">{{passData.name}}</div>
-        <div class="nickname">nickname</div>
-        <div>收藏</div>
-        <div>number</div>
+<!--        <div class="nickname">nickname</div>-->
+        <div @click="addFavArtist">收藏</div>
+<!--        <div>number</div>-->
       </div>
     </div>
 
@@ -53,9 +53,11 @@ export default {
           response.data.introduction.forEach( (item, index) => {
             that.detail.introduction[index].txtArr = item.txt.split('\n')
           })
-          // console.log(that.detail)
         })
         .catch()
+    },
+    addFavArtist() {
+      // console.log(111)
     }
   }
 }
@@ -71,7 +73,6 @@ export default {
   & .artist-top {
     display: flex;
     margin-bottom: 20px;
-    //border: 1px solid red;
     > img {
       width: 200px;
       height: 200px;
@@ -87,23 +88,6 @@ export default {
       }
     }
   }
-
-  //.artist-bars {
-  //  display: flex;
-  //  border-bottom: #efefef 1px solid;
-  //  color: #000;
-  //  &-item {
-  //
-  //  }
-  //  > div {
-  //    padding-bottom: 5px;
-  //    border-bottom: 2px solid red;
-  //    margin: 0 20px;
-  //  }
-  //  > div:first-child {
-  //    margin: 0;
-  //  }
-  //}
 
   .title {
     color: #000;
