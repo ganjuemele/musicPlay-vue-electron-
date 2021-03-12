@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '../views/Home'
 import PlaylistInfo from '../views/PlaylistInfo'
 import FavArtists from '../views/FavArtists'
 import CurPlay from '../views/CurPlay'
 import Artist from '../views/Artist'
+let fs = require('fs')
 
 Vue.use(VueRouter)
 

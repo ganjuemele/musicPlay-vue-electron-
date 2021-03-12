@@ -5,7 +5,7 @@
       <div>
         <div class="name">{{passData.name}}</div>
 <!--        <div class="nickname">nickname</div>-->
-        <div @click="addFavArtist">收藏</div>
+        <div class="fav" @click="addFavArtist">{{isFav?'已收藏':'收藏'}}</div>
 <!--        <div>number</div>-->
       </div>
     </div>
@@ -30,6 +30,8 @@
 <script>
 import axios from 'axios';
 import Tags from '@/components/Tags'
+// import xx from '../data/file.js'
+let fs = window.require('fs')
 
 export default {
   name: 'Artist',
@@ -38,11 +40,14 @@ export default {
     return {
       passData: this.$route.params,
       detail: {},
-      tagsIndex: 0
+      tagsIndex: 0,
+      isFav: !1,
+      index: 0
     }
   },
   created() {
     this.getArtistDetail()
+    this.readFile()
   },
   methods: {
     getArtistDetail() {
@@ -56,8 +61,46 @@ export default {
         })
         .catch()
     },
+    readFile() {
+      let that = this;
+      fs.readFile('./src/data/file.json',function (err, data) {
+        if (err) {
+          return console.error(err)
+        }
+        let dt = JSON.parse(data)
+        dt.data.forEach((item, index) => {
+          if(item.id === that.passData.id){
+            that.index = index
+            return that.isFav = !0
+          }
+        })
+      })
+    },
+    writeFile(dt) {
+      fs.writeFile('./src/data/file.json', JSON.stringify(dt),function (err, data) {
+        if (err) {
+          return console.error(err)
+        }
+      })
+    },
     addFavArtist() {
-      // console.log(111)
+      // let filePath = process.cwd() + 'file.txt' // 文件路径
+      let that = this;
+      fs.readFile('./src/data/file.json',function (err, data) {
+        if (err) {
+          return console.error(err)
+        }
+        let dt = JSON.parse(data)
+        if(that.isFav) {
+          dt.data.splice(that.index, 1);
+          that.isFav = false;
+          that.writeFile(dt)
+        } else {
+          dt.data.push(that.passData);
+          that.isFav = true;
+          that.writeFile(dt)
+        }
+      })
     }
   }
 }
@@ -81,10 +124,21 @@ export default {
     > div {
       margin-left: 30px;
       letter-spacing: -0.2px;
+
       .name {
         color: #000;
         font-size: 22px;
         font-weight: 450;
+      }
+      .fav {
+        margin-top: 20px;
+        text-align: center;
+        line-height: 30px;
+        font-weight: 450;
+        border-radius: 15px;
+        height: 30px;
+        border: 1px solid #b3b3b3;
+        max-width: 100px;
       }
     }
   }

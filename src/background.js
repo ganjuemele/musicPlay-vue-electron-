@@ -26,8 +26,11 @@ function createWindow () {
   win = new BrowserWindow({
     width: 1000,
     height: 750,
+    // useContentSize: true,
+    // fullscreen: true, // 全屏
+    // frame: false, // 去掉菜单
     webPreferences: {
-      nodeIntegration: true,
+      nodeIntegration: true, // 使渲染进程拥有node环境
       webSecurity: false // webSecurity取消跨域限制
     },
     // eslint-disable-next-line no-undef

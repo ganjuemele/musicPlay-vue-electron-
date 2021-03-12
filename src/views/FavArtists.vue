@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { favArtists } from '@/data/data'
+import favArtists from '@/data/file.json'
 import Tags from '@/components/Tags'
 import axios from 'axios'
 
@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     artistsQry() {
-      favArtists.forEach((item, index) => {
+      favArtists.data.forEach((item, index) => {
         axios.get('http://music.163.com/api/artist/' + item.id)
           .then(response => {
             // console.log(response.data)
@@ -94,7 +94,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-//$a = 0
   ::v-deep .fav-tab {
     font-weight: bold;
     margin-bottom: 20px;
