@@ -5,7 +5,7 @@
       <div>
         <div class="name">{{passData.name}}</div>
 <!--        <div class="nickname">nickname</div>-->
-        <div class="fav" @click="addFavArtist">{{isFav?'已收藏':'收藏'}}</div>
+        <div class="fav" @click="favArtist">{{isFav?'已收藏':'收藏'}}</div>
 <!--        <div>number</div>-->
       </div>
     </div>
@@ -47,7 +47,7 @@ export default {
   },
   created() {
     this.getArtistDetail()
-    this.readFile()
+    this.getFav()
   },
   methods: {
     getArtistDetail() {
@@ -62,18 +62,22 @@ export default {
         .catch()
     },
     readFile() {
-      let that = this;
-      fs.readFile('./src/data/file.json',function (err, data) {
-        if (err) {
-          return console.error(err)
-        }
-        let dt = JSON.parse(data)
-        dt.data.forEach((item, index) => {
-          if(item.id === that.passData.id){
-            that.index = index
-            return that.isFav = !0
+      return new Promise(resolve => {
+        fs.readFile('./src/data/file.json',function (err, data) {
+          if(err) {
+            return console.error(err)
           }
+          return resolve(JSON.parse(data))
         })
+      })
+    },
+    async getFav() {
+      let dt = await this.readFile();
+      dt.data.forEach((item, index) => {
+        if(item.id === this.passData.id) {
+          this.index = index;
+          return this.isFav = !0
+        }
       })
     },
     writeFile(dt) {
@@ -83,24 +87,18 @@ export default {
         }
       })
     },
-    addFavArtist() {
+    async favArtist() {
       // let filePath = process.cwd() + 'file.txt' // 文件路径
-      let that = this;
-      fs.readFile('./src/data/file.json',function (err, data) {
-        if (err) {
-          return console.error(err)
-        }
-        let dt = JSON.parse(data)
-        if(that.isFav) {
-          dt.data.splice(that.index, 1);
-          that.isFav = false;
-          that.writeFile(dt)
-        } else {
-          dt.data.push(that.passData);
-          that.isFav = true;
-          that.writeFile(dt)
-        }
-      })
+      let dt = await this.readFile();
+      if(this.isFav) {
+        dt.data.splice(this.index, 1);
+        this.isFav = false;
+        this.writeFile(dt)
+      } else {
+        dt.data.push(this.passData);
+        this.isFav = true;
+        this.writeFile(dt)
+      }
     }
   }
 }
