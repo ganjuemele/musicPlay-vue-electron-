@@ -30,7 +30,6 @@
 <script>
 import axios from 'axios';
 import Tags from '@/components/Tags'
-// import xx from '../data/file.js'
 let fs = window.require('fs')
 
 export default {
