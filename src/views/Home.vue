@@ -41,7 +41,7 @@ export default {
           that.new10 = response.data.data.slice(0, 10)
         })
         .catch()
-    },
+    }
   }
 }
 </script>
