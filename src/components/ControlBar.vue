@@ -189,6 +189,7 @@ export default {
     getMusicInfo: {
       handler() {
         this.curMusicInfo = this.$store.state.curMusicInfo;
+        console.log(this.curMusicInfo)
         this.music.isPlay = true;
       },
       deep: true
