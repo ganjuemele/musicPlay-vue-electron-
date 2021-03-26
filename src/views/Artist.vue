@@ -1,5 +1,5 @@
 <template>
-  <div class="artist">
+  <div class="master-view artist">
     <div class="artist-top">
       <img :src="passData.img1v1Url" alt=""/>
       <div>

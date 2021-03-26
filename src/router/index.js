@@ -5,7 +5,8 @@ import PlaylistInfo from '../views/PlaylistInfo'
 import FavArtists from '../views/FavArtists'
 import CurPlay from '../views/CurPlay'
 import Artist from '../views/Artist'
-let fs = require('fs')
+import DailyRec from '../views/DailyRec'
+// let fs = require('fs')
 
 Vue.use(VueRouter)
 
@@ -38,6 +39,10 @@ const routes = [
     path: '/artist/:id',
     name: 'Artist',
     component: Artist
+  }, {
+    path: '/home/dailyRec',
+    name: 'DailyRec',
+    component: DailyRec
   }
 ]
 

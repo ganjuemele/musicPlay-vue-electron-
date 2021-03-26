@@ -1,5 +1,5 @@
 <template>
-    <div style="margin-left:176px;width:824px;padding:30px 40px 72px;background-color: #fff;">
+    <div class="master-view">
       <Carrousel/>
       <FourEntry/>
       <RecommendPlaylist/>

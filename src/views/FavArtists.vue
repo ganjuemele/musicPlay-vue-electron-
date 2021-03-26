@@ -79,7 +79,6 @@ export default {
       }, delay)
     },
     jumpToArtist(e) {
-      let that = this;
       this.$router.push({
         name: 'Artist',
         params: {
